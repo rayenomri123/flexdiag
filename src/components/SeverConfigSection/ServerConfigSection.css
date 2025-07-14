@@ -141,6 +141,7 @@
 
 .dropdown-list li {
   padding: 8px 12px;
+  font-size: 0.85rem;
   cursor: pointer;
   color: var(--text-secondary);
 }

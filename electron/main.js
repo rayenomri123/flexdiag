@@ -1,5 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
+const os = require('os');
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -26,6 +27,20 @@ function createWindow() {
   ipcMain.on('window-minimize', () => win.minimize());
   ipcMain.on('window-close', () => win.close());
 }
+
+// IPC handler for network interfaces
+ipcMain.handle('get-network-interfaces', () => {
+  const allIfaces = os.networkInterfaces();
+  const ethIfaces = {};
+  for (const [name, addrs] of Object.entries(allIfaces)) {
+    if (!/^(eth|en)|Ethernet/i.test(name)) continue;
+    const usable = addrs.filter(a => !a.internal);
+    if (usable.length) {
+      ethIfaces[name] = usable;
+    }
+  }
+  return ethIfaces;
+});
 
 app.whenReady().then(createWindow);
 
