@@ -9,7 +9,7 @@
 .sidebar-btn {
     background-color: transparent;
     border: none;
-    border-left: 2px solid transparent;
+    border-left: 1px solid transparent;
     color: var(--icon-color);
     display: flex;
     align-items: center;
@@ -21,5 +21,10 @@
 }
 
 .sidebar-btn:hover {
+    color: var(--icon-color-hover);
+}
+
+.sidebar-btn.clicked {
+    border-left: 1px solid yellow;
     color: var(--icon-color-hover);
 }

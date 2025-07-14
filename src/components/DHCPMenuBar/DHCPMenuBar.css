@@ -1,0 +1,44 @@
+.DHCPMenuBar-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.DHCPMenuBar-btn {
+    background-color: transparent;
+    border: none;
+    color: var(--text-secondary);
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    padding: 8px 15px;
+    font-family: system-ui;
+    font-size: 0.9rem;
+    align-items: center;
+    gap: 6px;
+}
+
+.DHCPMenuBar-btn.open {
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+}
+
+.DHCPMenuBar-btn.open .chvr{
+    color: var(--text-primary);
+}
+
+.chvr {
+    margin-top: 2px;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.DHCPMenuBar-btn:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+}
+
+.DHCPMenuBar-btn:hover .chvr{
+    color: var(--text-primary);
+}

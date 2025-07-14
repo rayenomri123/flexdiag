@@ -7,7 +7,7 @@
 }
 
 .titlebar-section {
-    background-color: var(--bg-primary);
+    background-color: var(--bg-secondary);
     height: 3.7vh;
     width: 100vw;
     border-bottom: 1px solid var(--border-color);
@@ -21,7 +21,7 @@
 }
 
 .sidebar-section {
-    background-color: var(--bg-primary);
+    background-color: var(--bg-secondary);
     height: 96.2vh;
     width: 3.2vw;
     border-right: 1px solid var(--border-color);
@@ -40,7 +40,6 @@
     background-color: var(--bg-secondary);
     height: 96.2vh;
     width: 60vw;
-    border-right: 1px solid var(--border-color);
 }
 
 .console-section {
@@ -52,7 +51,9 @@
 }
 
 .config-section {
-    background-color: var(--bg-primary);
+    background-color: var(--bg-secondary);
     height: 96.2vh;
     width: 22.6vw;
+    margin-left: auto;
+    border-left: 1px solid var(--border-color);
 }

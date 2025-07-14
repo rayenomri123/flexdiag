@@ -5,6 +5,7 @@
   --text-primary: rgb(255, 255, 255);
   --text-secondary: rgb(200, 200, 200);
   --border-color: rgb(55, 55, 55);
+  --border-color-hover: rgb(75, 75, 75);
   --icon-color: rgba(200, 200, 200);
   --icon-color-hover: rgba(255, 255, 255);
   --invalid-color: rgb(200, 0, 0);
