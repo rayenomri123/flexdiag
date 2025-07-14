@@ -4,6 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "main": "./electron/main.js",
+  "author": {
+    "name": "Omri Rayen",
+    "email": "rayenomri23p@gmail.com"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -49,6 +53,7 @@
       "icon": "build/icon.ico"
     },
     "linux": {
+      "maintainer": "Omri Rayen <rayenomri23p@gmail.com>",
       "target": ["AppImage", "deb"],
       "icon": "build/icon.png"
     },
