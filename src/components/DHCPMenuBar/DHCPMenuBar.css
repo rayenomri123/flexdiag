@@ -12,33 +12,36 @@
     display: flex;
     flex-direction: row;
     cursor: pointer;
-    padding: 8px 15px;
+    padding: 10px 15px;
     font-family: system-ui;
     font-size: 0.9rem;
     align-items: center;
     gap: 6px;
 }
 
+
+.chvr {
+    display: inline-block;
+    margin-top: 2px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    transform: rotate(0deg);
+    /* transition: transform 0.2s ease; */
+}
+
 .DHCPMenuBar-btn.open {
     color: var(--text-primary);
     background-color: var(--bg-secondary);
 }
-
-.DHCPMenuBar-btn.open .chvr{
+.DHCPMenuBar-btn.open .chvr {
     color: var(--text-primary);
-}
-
-.chvr {
-    margin-top: 2px;
-    color: var(--text-secondary);
-    font-size: 14px;
+    transform: rotate(90deg);
 }
 
 .DHCPMenuBar-btn:hover {
     color: var(--text-primary);
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-primary-hover);
 }
-
-.DHCPMenuBar-btn:hover .chvr{
+.DHCPMenuBar-btn:hover .chvr {
     color: var(--text-primary);
 }

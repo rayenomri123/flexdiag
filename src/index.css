@@ -1,5 +1,6 @@
 :root {
   --bg-primary: rgb(30, 30, 30);
+  --bg-primary-hover: rgb(35, 35, 35);
   --bg-secondary: rgb(40, 40, 40);
   --bg-tertiary: rgb(50, 50, 50);
   --text-primary: rgb(255, 255, 255);

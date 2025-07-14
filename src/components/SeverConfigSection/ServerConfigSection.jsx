@@ -31,12 +31,6 @@ const ServerConfigSection = () => {
 
   return (
     <div className='serverconfigsection-container'>
-      <div className="action-section">
-        <button className="save-btn">
-          <VscSave />
-        </button>
-      </div>
-
       <div className="title-config-section">Server Configuration</div>
 
       <div className="main-config-section">
@@ -76,6 +70,9 @@ const ServerConfigSection = () => {
             <input type="text" placeholder='192.168.2.254' className='input-field-pool-range'/>
           </div>
         </div>
+      </div>
+      <div className="action-config-section">
+            <VscSave className='save-btn'/>
       </div>
     </div>
   )

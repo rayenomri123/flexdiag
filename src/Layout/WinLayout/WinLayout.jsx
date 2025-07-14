@@ -4,13 +4,15 @@ import TitleBar from '../TitleBar/TitleBar'
 import SideBar from '../SideBar/SideBar'
 import DHCPMenuBar from '../../components/DHCPMenuBar/DHCPMenuBar'
 import ServerConfigSection from '../../components/SeverConfigSection/ServerConfigSection'
+import ClientConfigSection from '../../components/ClientConfigSection/ClientConfigSection'
 
 const WinLayout = () => {
 
   const [isSideBarBtnClicked, setIsSideBarBtnClicked] = useState(false);
   const [isDhcpBtnClicked, setIsDhcpBtnClicked] = useState(false);
   const [isConfigSectionOpen, setIsConfigSectionOpen] = useState(false);
-  const [isDhcpConfigOpen, setIsDhcpConfigOpen] = useState(false);
+  const [isDhcpServerConfigOpen, setisDhcpServerConfigOpen] = useState(false);
+  const [isDhcpClientConfigOpen, setisDhcpClientConfigOpen] = useState(false);
 
   return (
     <div className='win-container'>
@@ -32,8 +34,10 @@ const WinLayout = () => {
                   <DHCPMenuBar 
                     isConfigSectionOpen={isConfigSectionOpen}
                     setIsConfigSectionOpen={setIsConfigSectionOpen}
-                    isDhcpConfigOpen={isDhcpConfigOpen}
-                    setIsDhcpConfigOpen={setIsDhcpConfigOpen}
+                    isDhcpServerConfigOpen={isDhcpServerConfigOpen}
+                    setisDhcpServerConfigOpen={setisDhcpServerConfigOpen}
+                    isDhcpClientConfigOpen={isDhcpClientConfigOpen}
+                    setisDhcpClientConfigOpen={setisDhcpClientConfigOpen}
                   />
                 )}
               </div>
@@ -43,10 +47,13 @@ const WinLayout = () => {
                     
                 </div>
             </div> */}
-            {isConfigSectionOpen && (
+            {isConfigSectionOpen && (isDhcpClientConfigOpen || isDhcpServerConfigOpen)  && (
               <div className="config-section">
-                {isDhcpConfigOpen && (
+                {isDhcpServerConfigOpen && (
                   <ServerConfigSection />
+                )}
+                {isDhcpClientConfigOpen && (
+                  <ClientConfigSection />
                 )}
               </div>
             )}
