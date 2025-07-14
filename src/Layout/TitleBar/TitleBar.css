@@ -1,0 +1,96 @@
+.titlebar-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.wincontrols-section {
+    height: 100%;
+    width: 5vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.optioncontrols-section {
+    width: 6.5vw;
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+}
+
+.appmenu-section {
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 7vw;
+}
+
+.app-logo{
+    height: 20px;
+}
+
+.app-name{
+    color: var(--text-secondary);
+    font-family: 'Caveat';
+    font-size: 1.1rem;
+}
+
+.wincontrols-btn {
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    color: var(--icon-color);
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s all ease;
+}
+
+.ooptioncontrols-btn {
+   
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    color: var(--icon-color);
+    font-size: 15px;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
+
+.ooptioncontrols-icon {
+    padding: 3px;
+    border-radius: 3px;
+}
+
+.ooptioncontrols-btn:hover .ooptioncontrols-icon{
+    background-color: var(--bg-tertiary);
+}
+
+.wincontrols-btn:hover {
+    color: var(--icon-color-hover);
+    background-color: var(--bg-tertiary);
+}
+
+.wincontrols-btn.close:hover {
+  background-color: var(--invalid-color);
+}
+
+.wincontrols-btn:active {
+    color: black;
+    background-color: white;
+}
+
+.wincontrols-btn.close:active {
+    color: black;
+    background-color: white;
+}

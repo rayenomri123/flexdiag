@@ -2,10 +2,10 @@
   "name": "flexdiag",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "type": "commonjs",
   "main": "./electron/main.js",
   "author": {
-    "name": "Omri Rayen",
+    "name": "OMRI Rayen",
     "email": "rayenomri23p@gmail.com"
   },
   "scripts": {
@@ -18,7 +18,8 @@
   },
   "dependencies": {
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-icons": "^5.5.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
@@ -35,7 +36,7 @@
     "vite": "^7.0.4",
     "wait-on": "^8.0.3"
   },
-    "build": {
+  "build": {
     "appId": "com.yourcompany.flexdiag",
     "productName": "FlexDiag",
     "directories": {
@@ -49,12 +50,18 @@
       "package.json"
     ],
     "win": {
-      "target": ["nsis", "portable"],
+      "target": [
+        "nsis",
+        "portable"
+      ],
       "icon": "build/icon.ico"
     },
     "linux": {
-      "maintainer": "Omri Rayen <rayenomri23p@gmail.com>",
-      "target": ["AppImage", "deb"],
+      "maintainer": "OMRI Rayen <rayenomri23p@gmail.com>",
+      "target": [
+        "AppImage",
+        "deb"
+      ],
       "icon": "build/icon.png"
     },
     "publish": null

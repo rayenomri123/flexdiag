@@ -1,14 +1,9 @@
-import { app, BrowserWindow } from 'electron';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname  = path.dirname(__filename);
+const { app, BrowserWindow, ipcMain } = require('electron');
+const path = require('path');
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 1024,
-    height: 768,
+    frame: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
@@ -16,12 +11,20 @@ function createWindow() {
     }
   });
 
+  win.webContents.openDevTools();
+  win.setMenu(null);
+  win.maximize();
+
   if (app.isPackaged) {
     const indexPath = path.join(process.resourcesPath, 'app.asar', 'dist', 'index.html');
     win.loadFile(indexPath);
   } else {
     win.loadURL('http://localhost:5173');
   }
+
+  // Window controls IPC
+  ipcMain.on('window-minimize', () => win.minimize());
+  ipcMain.on('window-close', () => win.close());
 }
 
 app.whenReady().then(createWindow);
