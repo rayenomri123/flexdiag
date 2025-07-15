@@ -1,12 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './TitleBar.css'
-import { VscClose, VscChromeMinimize, VscBell } from 'react-icons/vsc'
+import { VscClose, VscChromeMinimize, VscBell, VscCircleLargeFilled } from 'react-icons/vsc'
 import { CiLight, CiDark, CiWifiOn, CiWifiOff } from 'react-icons/ci'
 import logo from '../../assets/logo.png'
 
+const POLL_INTERVAL = 1000; // Check ethernet connectivity every 1s
+
 const TitleBar = () => {
+  
+  const [isConnected, setIsConnected] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const checkEthernet = async () => {
+      const connected = await window.networkAPI.isEthernetConnected();
+      if (!cancelled) {
+        setIsConnected(connected);
+      }
+    };
+
+    // initial check
+    checkEthernet();
+
+    // then poll every POLL_INTERVAL
+    const handle = setInterval(checkEthernet, POLL_INTERVAL);
+
+    return () => {
+      cancelled = true;
+      clearInterval(handle);
+    };
+  }, []);
+
   return (
     <div className='titlebar-container'>
+        <div className={`connectivity-indicator ${isConnected ? 'connected' : ''}`}>
+          <VscCircleLargeFilled />
+        </div>
         <div className="appmenu-section">
           <img src={logo} alt="Ampere logo" className='app-logo'/>
           <div className="app-name">FlexDiag</div>

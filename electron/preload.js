@@ -7,4 +7,5 @@ contextBridge.exposeInMainWorld('windowControlsAPI', {
 
 contextBridge.exposeInMainWorld('networkAPI', {
   getNetworkInterfaces: () => ipcRenderer.invoke('get-network-interfaces'),
+  isEthernetConnected: () => ipcRenderer.invoke('is-ethernet-connected'),
 });

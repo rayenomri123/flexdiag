@@ -1,6 +1,6 @@
 import React from 'react'
 import './ClientConfigSection.css'
-import { VscSave } from 'react-icons/vsc'
+import { VscSaveAll, VscTrash } from 'react-icons/vsc'
 
 const ClientConfigSection = () => {
   return (
@@ -13,7 +13,8 @@ const ClientConfigSection = () => {
             </div>
         </div>
         <div className="action-config-section">
-            <VscSave className='save-btn'/>
+            <VscSaveAll className='save-btn'/>
+            <VscTrash className='save-btn'/>
         </div>
     </div>
   )

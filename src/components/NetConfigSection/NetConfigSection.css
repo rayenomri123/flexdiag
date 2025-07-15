@@ -1,4 +1,4 @@
-.serverconfigsection-container {
+.configsection-container {
     height: 100%;
     width: 100%;
     display: flex;
@@ -30,6 +30,7 @@
     flex-direction: row;
     align-items: center;
     padding: 0 10px;
+    justify-content: flex-end;
 }
 
 .input-section {
@@ -140,7 +141,7 @@
 }
 
 .dropdown-list li {
-  padding: 8px 12px;
+  padding: 7px 12px;
   font-size: 0.85rem;
   cursor: pointer;
   color: var(--text-secondary);
@@ -156,7 +157,6 @@
     align-items: center;
     justify-content: center;
     font-size: 17px;
-    margin-left: auto;
     color: var(--icon-color);
     cursor: pointer;
     padding: 4px;

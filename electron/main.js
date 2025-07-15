@@ -12,7 +12,7 @@ function createWindow() {
     }
   });
 
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
   win.setMenu(null);
   win.maximize();
 
@@ -40,6 +40,17 @@ ipcMain.handle('get-network-interfaces', () => {
     }
   }
   return ethIfaces;
+});
+
+// Ethernet connectivity IPC handler
+ipcMain.handle('is-ethernet-connected', () => {
+  const allIfaces = os.networkInterfaces();
+  const ethKey = Object.keys(allIfaces)
+    .find(name => /^Ethernet$/i.test(name));
+  if (!ethKey) {
+    return false;
+  }
+  return allIfaces[ethKey].some(addr => !addr.internal);
 });
 
 app.whenReady().then(createWindow);

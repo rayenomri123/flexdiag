@@ -5,11 +5,13 @@
   --bg-tertiary: rgb(50, 50, 50);
   --text-primary: rgb(255, 255, 255);
   --text-secondary: rgb(200, 200, 200);
+  --text-tertiary: rgb(100, 100, 100);
   --border-color: rgb(55, 55, 55);
   --border-color-hover: rgb(75, 75, 75);
   --icon-color: rgba(200, 200, 200);
   --icon-color-hover: rgba(255, 255, 255);
   --invalid-color: rgb(200, 0, 0);
+  --valid-color: rgba(36, 236, 76, 0.8);
 }
 
 [data-theme="light"] {

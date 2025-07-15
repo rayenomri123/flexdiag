@@ -3,16 +3,15 @@ import './WinLayout.css'
 import TitleBar from '../TitleBar/TitleBar'
 import SideBar from '../SideBar/SideBar'
 import DHCPMenuBar from '../../components/DHCPMenuBar/DHCPMenuBar'
-import ServerConfigSection from '../../components/SeverConfigSection/ServerConfigSection'
-import ClientConfigSection from '../../components/ClientConfigSection/ClientConfigSection'
+import NetConfigSection from '../../components/NetConfigSection/NetConfigSection'
+import ConfigSection from '../../components/ConfigSection/ConfigSection'
 
 const WinLayout = () => {
 
   const [isSideBarBtnClicked, setIsSideBarBtnClicked] = useState(false);
   const [isDhcpBtnClicked, setIsDhcpBtnClicked] = useState(false);
-  const [isConfigSectionOpen, setIsConfigSectionOpen] = useState(false);
-  const [isDhcpServerConfigOpen, setisDhcpServerConfigOpen] = useState(false);
-  const [isDhcpClientConfigOpen, setisDhcpClientConfigOpen] = useState(false);
+  const [isConfigSectionOpen, setIsConfigSectionOpen] = useState(true);
+  const [isNetConfigOpen, setisNetConfigOpen] = useState(false);
 
   return (
     <div className='win-container'>
@@ -34,10 +33,8 @@ const WinLayout = () => {
                   <DHCPMenuBar 
                     isConfigSectionOpen={isConfigSectionOpen}
                     setIsConfigSectionOpen={setIsConfigSectionOpen}
-                    isDhcpServerConfigOpen={isDhcpServerConfigOpen}
-                    setisDhcpServerConfigOpen={setisDhcpServerConfigOpen}
-                    isDhcpClientConfigOpen={isDhcpClientConfigOpen}
-                    setisDhcpClientConfigOpen={setisDhcpClientConfigOpen}
+                    isNetConfigOpen={isNetConfigOpen}
+                    setisNetConfigOpen={setisNetConfigOpen}
                   />
                 )}
               </div>
@@ -47,13 +44,12 @@ const WinLayout = () => {
                     
                 </div>
             </div> */}
-            {isConfigSectionOpen && (isDhcpClientConfigOpen || isDhcpServerConfigOpen)  && (
+            {isConfigSectionOpen && (
               <div className="config-section">
-                {isDhcpServerConfigOpen && (
-                  <ServerConfigSection />
-                )}
-                {isDhcpClientConfigOpen && (
-                  <ClientConfigSection />
+                {isNetConfigOpen ? (
+                  <NetConfigSection />
+                ):(
+                  <ConfigSection /> 
                 )}
               </div>
             )}

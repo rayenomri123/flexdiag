@@ -5,6 +5,20 @@
     flex-direction: row;
 }
 
+.connectivity-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 12px 0 18px;
+    color: var(--valid-color);
+    opacity: 0;
+    font-size: 15px;
+}
+
+.connectivity-indicator.connected {
+    opacity: 1;
+}
+
 .wincontrols-section {
     height: 100%;
     width: 5vw;
@@ -27,7 +41,7 @@
     align-items: center;
     justify-content: center;
     gap: 5px;
-    width: 8vw;
+    width: 5vw;
 }
 
 .app-logo{

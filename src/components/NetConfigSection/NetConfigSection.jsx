@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './ServerConfigSection.css';
-import { VscSave, VscChevronDown } from 'react-icons/vsc';
+import './NetConfigSection.css';
+import { VscSaveAll, VscChevronDown, VscSync } from 'react-icons/vsc';
 
 const ServerConfigSection = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -49,8 +49,8 @@ const ServerConfigSection = () => {
   }, []);
 
   return (
-    <div className='serverconfigsection-container'>
-      <div className="title-config-section">Server Configuration</div>
+    <div className='configsection-container'>
+      <div className="title-config-section">Network Setup</div>
 
       <div className="main-config-section">
         <div className="input-section">
@@ -96,7 +96,8 @@ const ServerConfigSection = () => {
       </div>
 
       <div className="action-config-section">
-        <VscSave className='save-btn' />
+        <VscSync className='save-btn' />
+        <VscSaveAll className='save-btn' />
       </div>
     </div>
   );

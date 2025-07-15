@@ -4,24 +4,17 @@ import { VscChevronRight } from 'react-icons/vsc'
 
 const DHCPMenuBar = ({  isConfigSectionOpen,
                         setIsConfigSectionOpen,
-                        isDhcpServerConfigOpen,
-                        setisDhcpServerConfigOpen,
-                        isDhcpClientConfigOpen,
-                        setisDhcpClientConfigOpen
+                        isNetConfigOpen,
+                        setisNetConfigOpen
 }) => {
   return (
     <div className='DHCPMenuBar-container'>
-        <button className={`DHCPMenuBar-btn ${isDhcpServerConfigOpen ? 'open' : ''}`} onClick={() => {
+        <button className={`DHCPMenuBar-btn ${isNetConfigOpen ? 'open' : ''}`} onClick={() => {
           setIsConfigSectionOpen(true);
-          setisDhcpServerConfigOpen(!isDhcpServerConfigOpen);
-          setisDhcpClientConfigOpen(false);
-        }}><VscChevronRight className='chvr'/><span>Server configuration</span></button>
-        <button className={`DHCPMenuBar-btn ${isDhcpClientConfigOpen ? 'open' : ''}`} onClick={() => {
-          setIsConfigSectionOpen(true);
-          setisDhcpServerConfigOpen(false);
-          setisDhcpClientConfigOpen(!isDhcpClientConfigOpen);
-        }}><VscChevronRight className='chvr'/><span>Client configuration</span></button>
-        <button className="DHCPMenuBar-btn"><VscChevronRight className='chvr'/><span>Logs</span></button>
+          setisNetConfigOpen(!isNetConfigOpen);
+        }}><VscChevronRight className='chvr'/><span>Network setup</span></button>
+        <button className='DHCPMenuBar-btn'><VscChevronRight className='chvr'/><span>Server management</span></button>
+        <button className='DHCPMenuBar-btn'><VscChevronRight className='chvr'/><span>Logs</span></button>
     </div>
   )
 }

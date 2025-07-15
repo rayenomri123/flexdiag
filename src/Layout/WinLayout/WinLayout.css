@@ -39,7 +39,7 @@
     flex-direction: column;
     background-color: var(--bg-secondary);
     height: 96.2vh;
-    width: 60vw;
+    width: 62vw;
 }
 
 .console-section {
@@ -53,7 +53,7 @@
 .config-section {
     background-color: var(--bg-secondary);
     height: 96.2vh;
-    width: 22.6vw;
+    width: 20.6vw;
     margin-left: auto;
     border-left: 1px solid var(--border-color);
 }
