@@ -3,6 +3,7 @@ const path = require('path');
 const os = require('os');
 const db = require(path.join(__dirname, '../database', 'index.js'));
 const si = require('systeminformation');
+const { exec } = require('child_process');
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -112,10 +113,139 @@ ipcMain.handle('clear-network-setup', async () => {
   });
 });
 
+// IPC: Start DHCP (assign temporary IP to interface)
+ipcMain.handle('start-dhcp', async () => {
+  try {
+    const rows = await new Promise((resolve, reject) => {
+      db.all('SELECT * FROM network_setup', (err, rows) => {
+        if (err) reject(err);
+        else resolve(rows);
+      });
+    });
+
+    if (rows.length === 0) throw new Error("No network setup found");
+
+    const { interface: iface, ip_host, subnet } = rows[0];
+    const netmask = subnet || '255.255.255.0'; // Fallback default
+
+    const platform = process.platform;
+    let cmd = '';
+
+    if (platform === 'win32') {
+      // Windows command (PowerShell style)
+      cmd = `netsh interface ip set address "${iface}" static ${ip_host} ${netmask}`;
+    } else if (platform === 'linux') {
+      // Linux command (assumes sudo permission)
+      cmd = `sudo ip addr add ${ip_host}/${netmask} dev ${iface}`;
+    } else {
+      throw new Error("Unsupported platform");
+    }
+
+    return new Promise((resolve, reject) => {
+      exec(cmd, (error, stdout, stderr) => {
+        if (error) {
+          console.error(`start-dhcp error: ${stderr}`);
+          return reject(stderr);
+        }
+        console.log(`start-dhcp: ${stdout}`);
+        resolve(true);
+      });
+    });
+
+  } catch (err) {
+    console.error("start-dhcp error:", err);
+    throw err;
+  }
+});
+
+// IPC: Stop DHCP (remove host IP from interface)
+ipcMain.handle('stop-dhcp', async () => {
+  try {
+    const rows = await new Promise((resolve, reject) => {
+      db.all('SELECT * FROM network_setup', (err, rows) => {
+        if (err) reject(err);
+        else resolve(rows);
+      });
+    });
+
+    if (rows.length === 0) throw new Error("No network setup found");
+
+    const { interface: iface, ip_host, subnet } = rows[0];
+    const netmask = subnet || '255.255.255.0';
+
+    const platform = process.platform;
+    let cmd = '';
+
+    if (platform === 'win32') {
+      // Restore DHCP settings (remove static IP)
+      cmd = `netsh interface ip set address "${iface}" dhcp`;
+    } else if (platform === 'linux') {
+      cmd = `sudo ip addr del ${ip_host}/${netmask} dev ${iface}`;
+    } else {
+      throw new Error("Unsupported platform");
+    }
+
+    return new Promise((resolve, reject) => {
+      exec(cmd, (error, stdout, stderr) => {
+        if (error) {
+          console.error(`stop-dhcp error: ${stderr}`);
+          return reject(stderr);
+        }
+        console.log(`stop-dhcp: ${stdout}`);
+        resolve(true);
+      });
+    });
+
+  } catch (err) {
+    console.error("stop-dhcp error:", err);
+    throw err;
+  }
+});
+
 app.whenReady().then(createWindow);
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
+});
+
+app.on('before-quit', async (event) => {
+  console.log('App is quitting, attempting to stop DHCP...');
+  try {
+    const rows = await new Promise((resolve, reject) => {
+      db.all('SELECT * FROM network_setup', (err, rows) => {
+        if (err) reject(err);
+        else resolve(rows);
+      });
+    });
+
+    if (rows.length === 0) return;
+
+    const { interface: iface, ip_host, subnet } = rows[0];
+    const netmask = subnet || '255.255.255.0';
+    const platform = process.platform;
+
+    let cmd = '';
+
+    if (platform === 'win32') {
+      cmd = `netsh interface ip set address "${iface}" dhcp`;
+    } else if (platform === 'linux') {
+      cmd = `sudo ip addr del ${ip_host}/${netmask} dev ${iface}`;
+    }
+
+    await new Promise((resolve, reject) => {
+      exec(cmd, (error, stdout, stderr) => {
+        if (error) {
+          console.error('Failed to stop DHCP on quit:', stderr);
+          return reject(stderr);
+        }
+        console.log('DHCP stopped on app quit');
+        resolve();
+      });
+    });
+
+  } catch (err) {
+    console.error('Error during DHCP cleanup on quit:', err);
+  }
 });
 
 app.on('activate', () => {

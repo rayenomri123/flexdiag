@@ -15,3 +15,8 @@ contextBridge.exposeInMainWorld('dbAPI', {
   clearNetworkSetup:     ()       => ipcRenderer.invoke('clear-network-setup'),
   fetchNetworkSetup: () => ipcRenderer.invoke('fetch-network-setup'),
 });
+
+contextBridge.exposeInMainWorld('dhcpAPI', {
+  start: () => ipcRenderer.invoke('start-dhcp'),
+  stop: () => ipcRenderer.invoke('stop-dhcp'),
+});

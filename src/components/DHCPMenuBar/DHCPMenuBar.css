@@ -40,7 +40,7 @@
 
 .DHCPMenuBar-btn:hover {
     color: var(--text-primary);
-    background-color: var(--bg-primary-hover);
+    background-color: var(--bg-secondary);
 }
 .DHCPMenuBar-btn:hover .chvr {
     color: var(--text-primary);

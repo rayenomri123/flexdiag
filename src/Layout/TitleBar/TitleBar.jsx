@@ -9,6 +9,7 @@ const POLL_INTERVAL = 2000; // Check ethernet connectivity every 2s
 const TitleBar = () => {
   
   const [isConnected, setIsConnected] = useState(false);
+  const [dhcpOpen, setDhcpOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -32,6 +33,29 @@ const TitleBar = () => {
     };
   }, []);
 
+  const handleToggleDhcp = async () => {
+    try {
+      setDhcpOpen(!dhcpOpen);
+      if (!dhcpOpen) {
+        await window.dhcpAPI.start();
+        console.log('DHCP started');
+      } else {
+        await window.dhcpAPI.stop();
+        console.log('DHCP stopped');
+      }
+    } catch (err) {
+      console.error('Error toggling DHCP:', err);
+      alert('Failed to toggle DHCP. Check console for details.');
+    }
+  }
+
+  const onDhcpClick = async () => {
+    const connected = await window.networkAPI.isEthernetConnected();
+    if (connected) {
+      await handleToggleDhcp();
+    }
+  };
+
   return (
     <div className='titlebar-container'>
         <div className={`connectivity-indicator ${isConnected ? 'connected' : ''}`}>
@@ -42,13 +66,18 @@ const TitleBar = () => {
           <div className="app-name">FlexDiag</div>
         </div>
         <div className="optioncontrols-section">
-          <button className="ooptioncontrols-btn">
-            <CiWifiOn className='ooptioncontrols-icon' size={17}/>
+          <button className={`optioncontrols-btn ${dhcpOpen ? 'on' : 'off'}`} onClick={() => onDhcpClick()}>
+            {dhcpOpen ? (
+              <CiWifiOn className='ooptioncontrols-icon' size={19}/>
+            ):(
+              <CiWifiOff className='ooptioncontrols-icon' size={19}/>
+            )}
+            
           </button>
-          <button className="ooptioncontrols-btn">
-            <CiLight className='ooptioncontrols-icon' size={17}/>
+          <button className="optioncontrols-btn">
+            <CiLight className='ooptioncontrols-icon' size={18}/>
           </button>
-          <button className="ooptioncontrols-btn">
+          <button className="optioncontrols-btn">
             <VscBell className='ooptioncontrols-icon'/>
           </button>
         </div>

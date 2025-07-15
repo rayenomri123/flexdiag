@@ -67,7 +67,7 @@
     transition: 0.2s all ease;
 }
 
-.ooptioncontrols-btn {
+.optioncontrols-btn {
    
     background-color: transparent;
     display: flex;
@@ -81,12 +81,20 @@
     padding: 0;
 }
 
+.optioncontrols-btn.on {
+    color: var(--valid-color);
+}
+
+.optioncontrols-btn.off {
+    color: var(--invalid-color);
+}
+
 .ooptioncontrols-icon {
     padding: 3px;
     border-radius: 3px;
 }
 
-.ooptioncontrols-btn:hover .ooptioncontrols-icon{
+.optioncontrols-btn:hover .ooptioncontrols-icon{
     background-color: var(--bg-tertiary);
 }
 
