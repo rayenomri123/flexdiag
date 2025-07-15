@@ -5,6 +5,7 @@ import SideBar from '../SideBar/SideBar'
 import DHCPMenuBar from '../../components/DHCPMenuBar/DHCPMenuBar'
 import NetConfigSection from '../../components/NetConfigSection/NetConfigSection'
 import ConfigSection from '../../components/ConfigSection/ConfigSection'
+import DHCPLogs from '../../components/DHCPLogs/DHCPLogs'
 
 const WinLayout = () => {
 
@@ -12,6 +13,7 @@ const WinLayout = () => {
   const [isDhcpBtnClicked, setIsDhcpBtnClicked] = useState(false);
   const [isConfigSectionOpen, setIsConfigSectionOpen] = useState(true);
   const [isNetConfigOpen, setisNetConfigOpen] = useState(false);
+  const [isDhcpLogOpen, setIsDhcpLogOpen] = useState(false);
 
   return (
     <div className='win-container'>
@@ -35,15 +37,20 @@ const WinLayout = () => {
                     setIsConfigSectionOpen={setIsConfigSectionOpen}
                     isNetConfigOpen={isNetConfigOpen}
                     setisNetConfigOpen={setisNetConfigOpen}
+                    isDhcpLogOpen={isDhcpLogOpen}
+                    setIsDhcpLogOpen={setIsDhcpLogOpen}
                   />
                 )}
               </div>
             )}
-            {/* <div className="display-section">
-                <div className="console-section">
+            <div className="display-section">
+              {isDhcpLogOpen && (
+                <DHCPLogs />
+              )}
+                {/* <div className="console-section">
                     
-                </div>
-            </div> */}
+                </div> */}
+            </div>
             {isConfigSectionOpen && (
               <div className="config-section">
                 {isNetConfigOpen ? (
