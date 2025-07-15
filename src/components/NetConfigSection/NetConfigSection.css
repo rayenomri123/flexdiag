@@ -31,6 +31,7 @@
     align-items: center;
     padding: 0 10px;
     justify-content: flex-end;
+    gap: 2px;
 }
 
 .input-section {
@@ -152,10 +153,7 @@
   color: var(--text-primary);
 }
 
-.save-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.action-btn {
     font-size: 17px;
     color: var(--icon-color);
     cursor: pointer;
@@ -163,7 +161,24 @@
     border-radius: 4px;
 }
 
-.save-btn:hover {
+.action-btn:hover {
     color: var(--icon-color-hover);
     background-color: var(--bg-secondary);
+}
+
+.action-logs {
+  flex: 1;
+  margin-right: auto;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.action-logs .valid {
+  color: var(--valid-color);
+}
+
+.action-logs .invalid {
+  color: var(--invalid-color);
 }

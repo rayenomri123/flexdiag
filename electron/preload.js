@@ -9,3 +9,9 @@ contextBridge.exposeInMainWorld('networkAPI', {
   getNetworkInterfaces: () => ipcRenderer.invoke('get-network-interfaces'),
   isEthernetConnected: () => ipcRenderer.invoke('is-ethernet-connected'),
 });
+
+contextBridge.exposeInMainWorld('dbAPI', {
+  saveNetworkSetup: settings => ipcRenderer.invoke('save-network-setup', settings),
+  clearNetworkSetup:     ()       => ipcRenderer.invoke('clear-network-setup'),
+  fetchNetworkSetup: () => ipcRenderer.invoke('fetch-network-setup'),
+});
