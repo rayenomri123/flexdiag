@@ -4,7 +4,7 @@ import { VscClose, VscChromeMinimize, VscBell, VscCircleLargeFilled } from 'reac
 import { CiLight, CiDark, CiWifiOn, CiWifiOff } from 'react-icons/ci'
 import logo from '../../assets/logo.png'
 
-const POLL_INTERVAL = 1000; // Check ethernet connectivity every 1s
+const POLL_INTERVAL = 2000; // Check ethernet connectivity every 2s
 
 const TitleBar = () => {
   

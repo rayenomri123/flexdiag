@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const os = require('os');
 const db = require(path.join(__dirname, '../database', 'index.js'));
+const si = require('systeminformation');
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -43,33 +44,50 @@ ipcMain.handle('get-network-interfaces', () => {
   return ethIfaces;
 });
 
-// Ethernet connectivity IPC handler
-ipcMain.handle('is-ethernet-connected', () => {
-  const allIfaces = os.networkInterfaces();
-  const ethKey = Object.keys(allIfaces)
-    .find(name => /^Ethernet$/i.test(name));
-  if (!ethKey) {
+// IPC to check if any wired (Ethernet) NIC is up
+ipcMain.handle('is-ethernet-connected', async () => {
+  try {
+    const ifaces = await si.networkInterfaces();
+    const realEthernet = ifaces.filter(iface =>
+      iface.type === 'wired' &&
+      iface.operstate === 'up' &&
+      iface.virtual === false &&
+      iface.speed > 0 &&
+      /^(eth|en|Ethernet)/i.test(iface.iface)
+    );
+    return realEthernet.length > 0;
+  } catch (err) {
+    console.error('Error in is-ethernet-connected:', err);
     return false;
   }
-  return allIfaces[ethKey].some(addr => !addr.internal);
 });
 
-// IPC to save a network setup
+// IPC to save a network setup (modified to ensure only one row)
 ipcMain.handle('save-network-setup', async (_, { interface, ip_host, subnet, pool_val1, pool_val2 }) => {
   return new Promise((resolve, reject) => {
-    const stmt = db.prepare(`
-      INSERT INTO network_setup(interface, ip_host, subnet, pool_val1, pool_val2)
-      VALUES (?, ?, ?, ?, ?)
-      ON CONFLICT(interface) DO UPDATE SET
-        ip_host=excluded.ip_host,
-        subnet=excluded.subnet,
-        pool_val1=excluded.pool_val1,
-        pool_val2=excluded.pool_val2
-    `);
-    stmt.run(interface, ip_host, subnet, pool_val1, pool_val2, err => {
-      stmt.finalize();
-      if (err) reject(err.message);
-      else resolve(true);
+    db.serialize(() => {
+      // Step 1: Delete all existing rows in network_setup
+      db.run(`DELETE FROM network_setup`, err => {
+        if (err) {
+          console.error('Error clearing network_setup:', err);
+          return reject(err.message);
+        }
+
+        // Step 2: Insert the new row
+        const stmt = db.prepare(`
+          INSERT INTO network_setup (interface, ip_host, subnet, pool_val1, pool_val2)
+          VALUES (?, ?, ?, ?, ?)
+        `);
+        stmt.run(interface, ip_host, subnet, pool_val1, pool_val2, err => {
+          stmt.finalize();
+          if (err) {
+            console.error('Error inserting network setup:', err);
+            reject(err.message);
+          } else {
+            resolve(true);
+          }
+        });
+      });
     });
   });
 });

@@ -5,77 +5,51 @@ import { VscSaveAll, VscChevronDown, VscSync } from 'react-icons/vsc';
 const ServerConfigSection = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [interfaces, setInterfaces] = useState([]);
+
+  // Single row config state
   const [selectedInterface, setSelectedInterface] = useState('');
-  const [networkSetup, setNetworkSetup] = useState({});
-  
-  // form fields
   const [ipHost, setIpHost] = useState('');
   const [subnet, setSubnet] = useState('');
   const [poolVal1, setPoolVal1] = useState('');
   const [poolVal2, setPoolVal2] = useState('');
 
   // action logs: only hold one at a time
-  const [log, setLog] = useState(null); // { message, valid }
-  
-  // add a log entry that auto-clears after 2s
+  const [log, setLog] = useState(null);
   const addLog = (message, valid) => {
     setLog({ message, valid });
     setTimeout(() => setLog(null), 2000);
   };
-  
-  // load interfaces
+
+  // Fetch network interfaces + saved config
   useEffect(() => {
     (async () => {
       try {
+        // load available interfaces
         const ifs = await window.networkAPI.getNetworkInterfaces();
         const names = Object.keys(ifs);
         setInterfaces(names);
-        if (names.length > 0) setSelectedInterface(names[0]);
+
+        // load saved settings (only one row)
+        const rows = await window.dbAPI.fetchNetworkSetup();
+        if (rows.length) {
+          const saved = rows[0];
+          const iface = saved.interface;
+          setSelectedInterface(iface);
+          setIpHost(saved.ip_host);
+          setSubnet(saved.subnet);
+          setPoolVal1(saved.pool_val1);
+          setPoolVal2(saved.pool_val2);
+        } else if (names.length) {
+          // no saved config: default to first iface
+          setSelectedInterface(names[0]);
+        }
       } catch (e) {
-        console.error('Failed fetching interfaces:', e);
-        addLog('Failed fetching interfaces', false);
+        console.error('Initialization failed:', e);
+        addLog('Initialization failed', false);
       }
     })();
   }, []);
-  
-  // load saved network_setup
-  const fetchSetups = async () => {
-    try {
-      const rows = await window.dbAPI.fetchNetworkSetup();
-      const lookup = {};
-      rows.forEach(r => {
-        lookup[r.interface] = {
-          ip_host: r.ip_host,
-          subnet: r.subnet,
-          pool_val1: r.pool_val1,
-          pool_val2: r.pool_val2,
-        };
-      });
-      setNetworkSetup(lookup);
-    } catch (e) {
-      console.error('Failed fetching network_setup:', e);
-      setNetworkSetup({});
-      addLog('Failed fetching saved setups', false);
-    }
-  };
-  useEffect(() => { fetchSetups(); }, []);
-  
-  // populate fields when interface or setup changes
-  useEffect(() => {
-    const cfg = networkSetup[selectedInterface];
-    if (cfg) {
-      setIpHost(cfg.ip_host);
-      setSubnet(cfg.subnet);
-      setPoolVal1(cfg.pool_val1);
-      setPoolVal2(cfg.pool_val2);
-    } else {
-      setIpHost('');
-      setSubnet('');
-      setPoolVal1('');
-      setPoolVal2('');
-    }
-  }, [selectedInterface, networkSetup]);
-  
+
   // dropdown handlers
   const toggleDropdown = () => setIsDropdownOpen(o => !o);
   const selectInterface = iface => {
@@ -89,7 +63,7 @@ const ServerConfigSection = () => {
     document.addEventListener('click', handler);
     return () => document.removeEventListener('click', handler);
   }, []);
-  
+
   // save current form
   const handleSave = async () => {
     if (!selectedInterface) return;
@@ -101,26 +75,29 @@ const ServerConfigSection = () => {
         pool_val1: poolVal1,
         pool_val2: poolVal2,
       });
-      await fetchSetups();
       addLog(`Saved settings for "${selectedInterface}"`, true);
     } catch (e) {
       console.error('Save failed:', e);
-      addLog(`Save failed for "${selectedInterface}": ${e.message || e}`, false);
+      addLog(`Save failed: ${e.message || e}`, false);
     }
   };
-  
+
   // clear all setups
   const handleClear = async () => {
     try {
       await window.dbAPI.clearNetworkSetup();
-      await fetchSetups();
+      // reset form
+      setIpHost('');
+      setSubnet('');
+      setPoolVal1('');
+      setPoolVal2('');
       addLog('Cleared all saved setups', true);
     } catch (e) {
       console.error('Clear failed:', e);
       addLog(`Clear failed: ${e.message || e}`, false);
     }
   };
-  
+
   return (
     <div className='configsection-container'>
       <div className="title-config-section">Network Setup</div>
