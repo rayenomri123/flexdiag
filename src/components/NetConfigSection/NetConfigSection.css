@@ -121,6 +121,7 @@
 
   .chevron-icon {
     transition: transform 0.2s ease;
+    font-size: 16px;
   }
 
   .chevron-icon.rotated {
@@ -308,6 +309,7 @@
 
   .chevron-icon {
     transition: transform 0.2s ease;
+    font-size: 16px;
   }
 
   .chevron-icon.rotated {
