@@ -7,8 +7,6 @@ const { exec } = require('child_process');
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 1525, // Set your desired width in pixels
-    height: 810, // Set your desired height in pixels
     frame: false,
     webPreferences: {
       backgroundThrottling: false,
@@ -19,8 +17,9 @@ function createWindow() {
     }
   });
 
-  // win.webContents.openDevTools();
+  win.webContents.openDevTools();
   win.setMenu(null);
+  win.maximize();
 
   if (app.isPackaged) {
     const indexPath = path.join(process.resourcesPath, 'app.asar', 'dist', 'index.html');
@@ -69,18 +68,25 @@ ipcMain.handle('is-ethernet-connected', async () => {
 // IPC to save a network setup (modified to ensure only one row)
 ipcMain.handle('save-network-setup', async (_, { interface, ip_host, subnet, pool_val1, pool_val2 }) => {
   return new Promise((resolve, reject) => {
-    db.run(
-      `REPLACE INTO network_setup (interface, ip_host, subnet, pool_val1, pool_val2) VALUES (?, ?, ?, ?, ?)`,
-      [interface, ip_host, subnet, pool_val1, pool_val2],
-      err => {
-        if (err) {
-          console.error('Error saving network setup:', err);
-          reject(err.message);
-        } else {
-          resolve(true);
-        }
-      }
-    );
+    db.serialize(() => {
+      // 1) Delete all existing rows
+      db.run(`DELETE FROM network_setup`, err => {
+        if (err) return reject(err.message);
+        // 2) Insert the new row
+        db.run(
+          `INSERT INTO network_setup (interface, ip_host, subnet, pool_val1, pool_val2)
+           VALUES (?, ?, ?, ?, ?)`,
+          [interface, ip_host, subnet, pool_val1, pool_val2],
+          err2 => {
+            if (err2) {
+              console.error('Error saving network setup:', err2);
+              return reject(err2.message);
+            }
+            resolve(true);
+          }
+        );
+      });
+    });
   });
 });
 

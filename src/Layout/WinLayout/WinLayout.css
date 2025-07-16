@@ -1,60 +1,100 @@
-.win-container {
-    background-color: var(--bg-primary);
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
+@media (min-width: 1800px) {
+    .win-container {
+        background-color: var(--bg-primary);
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .titlebar-section {
+        background-color: var(--bg-secondary);
+        height: 3.7vh;
+        max-height: 40px;
+        width: 100vw;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .main-win {
+        height: 96.2vh;
+        width: 100vw;
+        display: flex;
+        flex: row;
+    }
+
+    .sidebar-section {
+        background-color: var(--bg-secondary);
+        height: 96.2vh;
+        width: 3.2vw;
+        max-width: 3.2vw;
+        border-right: 1px solid var(--border-color);
+    }
+
+    .menubar-section {
+        background-color: var(--bg-primary);
+        height: 96.2vh;
+        width: 14vw;
+        border-right: 1px solid var(--border-color);
+        max-width: 9vw;
+    }
+
+    .display-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--bg-primary);
+        height: 96.2vh;
+        width: 62vw;
+    }
+
+    .console-section {
+        background-color: var(--bg-secondary);
+        height: 25vh;
+        width: 60vw;
+        margin-top: auto;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .config-section {
+        background-color: var(--bg-secondary);
+        height: 96.2vh;
+        width: 20.6vw;
+        max-width: 410px;
+        margin-left: auto;
+        border-left: 1px solid var(--border-color);
+    }
 }
 
-.titlebar-section {
-    background-color: var(--bg-secondary);
-    height: 3.7vh;
-    width: 100vw;
-    border-bottom: 1px solid var(--border-color);
-}
+@media (min-width: 1800px) {
+    .main-win {
+        height: 97vh;
+        width: 100vw;
+        display: flex;
+        flex: row;
+    }
 
-.main-win {
-    height: 96.2vh;
-    width: 100vw;
-    display: flex;
-    flex: row;
-}
+    .config-section {
+        background-color: var(--bg-secondary);
+        height: 97vh;
+        width: 20.6vw;
+        max-width: 410px;
+        margin-left: auto;
+        border-left: 1px solid var(--border-color);
+    }
 
-.sidebar-section {
-    background-color: var(--bg-secondary);
-    height: 96.2vh;
-    width: 3.2vw;
-    border-right: 1px solid var(--border-color);
-}
+    .sidebar-section {
+        background-color: var(--bg-secondary);
+        height: 97vh;
+        width: 2.2vw;
+        max-width: 3.2vw;
+        border-right: 1px solid var(--border-color);
+    }
 
-.menubar-section {
-    background-color: var(--bg-primary);
-    height: 96.2vh;
-    width: 14vw;
-    border-right: 1px solid var(--border-color);
-}
-
-.display-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--bg-primary);
-    height: 96.2vh;
-    width: 62vw;
-}
-
-.console-section {
-    background-color: var(--bg-secondary);
-    height: 25vh;
-    width: 60vw;
-    margin-top: auto;
-    border-top: 1px solid var(--border-color);
-}
-
-.config-section {
-    background-color: var(--bg-secondary);
-    height: 96.2vh;
-    width: 20.6vw;
-    margin-left: auto;
-    border-left: 1px solid var(--border-color);
+    .menubar-section {
+        background-color: var(--bg-primary);
+        height: 97vh;
+        width: 14vw;
+        max-width: 9vw;
+        border-right: 1px solid var(--border-color);
+    }
 }
