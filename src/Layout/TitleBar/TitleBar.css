@@ -92,31 +92,25 @@
 
     .optioncontrols-icon {
         padding: 3px;
-        border-radius: 3px;
+        border-radius: 4px;
         font-size: 15.5px;
     }
 
     .optioncontrols-icon1 {
         padding: 3px;
-        border-radius: 3px;
-        font-size: 19px;
+        border-radius: 4px;
+        font-size: 15.5px;
     }
 
-    .optioncontrols-icon2 {
-        padding: 3px;
-        border-radius: 3px;
-        font-size: 18px;
+    .optioncontrols-btn.on .optioncontrols-icon1 {
+        background-color: var(--valid-color-hover);
+    }
+
+    .optioncontrols-btn.off .optioncontrols-icon1 {
+        background-color: var(--invalid-color-hover);
     }
 
     .optioncontrols-btn:hover .optioncontrols-icon{
-        background-color: var(--bg-tertiary);
-    }
-
-    .optioncontrols-btn:hover .optioncontrols-icon1{
-        background-color: var(--bg-tertiary);
-    }
-
-    .optioncontrols-btn:hover .optioncontrols-icon2{
         background-color: var(--bg-tertiary);
     }
 
@@ -233,33 +227,27 @@
     }
 
     .optioncontrols-icon {
-        padding: 3px;
+        padding: 3.5px;
         border-radius: 3px;
-        font-size: 17px;
+        font-size: 16px;
     }
 
     .optioncontrols-icon1 {
-        padding: 3px;
-        border-radius: 3px;
-        font-size: 23px;
+        padding: 3.5px;
+        border-radius: 4px;
+        font-size: 16px;
     }
 
-    .optioncontrols-icon2 {
-        padding: 3px;
-        border-radius: 3px;
-        font-size: 22px;
+    .optioncontrols-btn.on .optioncontrols-icon1 {
+        background-color: var(--valid-color-hover);
+    }
+
+    .optioncontrols-btn.off .optioncontrols-icon1 {
+        background-color: var(--invalid-color-hover);
     }
 
     .optioncontrols-btn:hover .optioncontrols-icon{
-        background-color: var(--bg-tertiary);
-    }
-
-    .optioncontrols-btn:hover .optioncontrols-icon1{
-        background-color: var(--bg-tertiary);
-    }
-
-    .optioncontrols-btn:hover .optioncontrols-icon2{
-        background-color: var(--bg-tertiary);
+        background-color: var(--bg-4);
     }
 
     .wincontrols-btn:hover {

@@ -75,7 +75,7 @@ const ServerConfigSection = () => {
         pool_val1: poolVal1,
         pool_val2: poolVal2,
       });
-      addLog(`Saved settings for "${selectedInterface}"`, true);
+      addLog(`Saved settings`, true);
     } catch (e) {
       console.error('Save failed:', e);
       addLog(`Save failed: ${e.message || e}`, false);

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './TitleBar.css'
-import { VscClose, VscChromeMinimize, VscBell, VscCircleLargeFilled } from 'react-icons/vsc'
-import { CiLight, CiDark, CiWifiOn, CiWifiOff } from 'react-icons/ci'
+import { VscClose, VscChromeMinimize, VscBell, VscCircleLargeFilled, VscColorMode, VscGitMerge } from 'react-icons/vsc'
 import logo from '../../assets/logo.png'
 
 const POLL_INTERVAL = 2000; // Check ethernet connectivity every 2s
@@ -67,15 +66,10 @@ const TitleBar = () => {
         </div>
         <div className="optioncontrols-section">
           <button className={`optioncontrols-btn ${dhcpOpen ? 'on' : 'off'}`} onClick={() => onDhcpClick()}>
-            {dhcpOpen ? (
-              <CiWifiOn className='optioncontrols-icon1'/>
-            ):(
-              <CiWifiOff className='optioncontrols-icon1'/>
-            )}
-            
+              <VscGitMerge className='optioncontrols-icon1'/>
           </button>
           <button className="optioncontrols-btn">
-            <CiLight className='optioncontrols-icon2'/>
+            <VscColorMode className='optioncontrols-icon'/>
           </button>
           <button className="optioncontrols-btn">
             <VscBell className='optioncontrols-icon'/>

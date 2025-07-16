@@ -26,7 +26,7 @@
     }
 
     .sidebar-btn.clicked {
-        border-left: 2px solid yellow;
+        border-left: 1px solid yellow;
         color: var(--icon-color-hover);
     }
 }
@@ -59,7 +59,7 @@
     }
 
     .sidebar-btn.clicked {
-        border-left: 2px solid yellow;
+        border-left: 1px solid yellow;
         color: var(--icon-color-hover);
     }
 }
