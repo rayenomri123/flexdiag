@@ -9,12 +9,14 @@
     "email": "rayenomri23p@gmail.com"
   },
   "scripts": {
+    "postinstall": "electron-rebuild",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "start": "concurrently \"npm:dev\" \"wait-on http://localhost:5173 && electron .\"",
     "electron:prod": "npm run build && electron .",
-    "dist": "npm run build && electron-builder"
+    "predist": "npm run build",
+    "dist": "electron-builder --publish never"
   },
   "dependencies": {
     "react": "^19.1.0",
@@ -42,6 +44,9 @@
   "build": {
     "appId": "com.yourcompany.flexdiag",
     "productName": "FlexDiag",
+    "asar": true,
+    "npmRebuild": false,
+    "buildDependenciesFromSource": true,
     "directories": {
       "output": "release",
       "buildResources": "build"
@@ -50,7 +55,6 @@
       "dist/**/*",
       "electron/**/*",
       "database/**/*",
-      "node_modules/**/*",
       "package.json"
     ],
     "win": {

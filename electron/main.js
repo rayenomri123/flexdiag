@@ -9,6 +9,7 @@ function createWindow() {
   const win = new BrowserWindow({
     frame: false,
     webPreferences: {
+      backgroundThrottling: false,
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false,
@@ -201,6 +202,12 @@ ipcMain.handle('stop-dhcp', async () => {
     throw err;
   }
 });
+
+// disable Chromium’s timer throttling in background or occluded windows
+app.commandLine.appendSwitch('disable-background-timer-throttling');
+// disable Chromium’s occlusion/backgrounding heuristics
+app.commandLine.appendSwitch('disable-renderer-backgrounding');
+app.disableHardwareAcceleration(false);
 
 app.whenReady().then(createWindow);
 
