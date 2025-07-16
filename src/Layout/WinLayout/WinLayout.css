@@ -67,7 +67,7 @@
 
     .titlebar-section {
         background-color: var(--bg-secondary);
-        height: 3.7vh;
+        height: 2.5vh;
         max-height: 40px;
         width: 100vw;
         border-bottom: 1px solid var(--border-color);
@@ -82,7 +82,7 @@
     }
 
     .main-win {
-        height: 97vh;
+        height: 97.4vh;
         width: 100vw;
         display: flex;
         flex: row;
@@ -90,7 +90,7 @@
 
     .config-section {
         background-color: var(--bg-secondary);
-        height: 97vh;
+        height: 97.4vh;
         width: 20.6vw;
         max-width: 410px;
         margin-left: auto;
@@ -99,14 +99,14 @@
 
     .sidebar-section {
         background-color: var(--bg-secondary);
-        height: 97vh;
+        height: 97.4vh;
         width: 2.2vw;
         border-right: 1px solid var(--border-color);
     }
 
     .menubar-section {
         background-color: var(--bg-primary);
-        height: 97vh;
+        height: 97.4vh;
         width: 9.5vw;
         border-right: 1px solid var(--border-color);
     }
