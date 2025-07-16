@@ -7,18 +7,20 @@ const { exec } = require('child_process');
 
 function createWindow() {
   const win = new BrowserWindow({
+    width: 1525, // Set your desired width in pixels
+    height: 810, // Set your desired height in pixels
     frame: false,
     webPreferences: {
       backgroundThrottling: false,
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false,
+      sandbox: true,
     }
   });
 
   // win.webContents.openDevTools();
   win.setMenu(null);
-  win.maximize();
 
   if (app.isPackaged) {
     const indexPath = path.join(process.resourcesPath, 'app.asar', 'dist', 'index.html');
@@ -67,30 +69,18 @@ ipcMain.handle('is-ethernet-connected', async () => {
 // IPC to save a network setup (modified to ensure only one row)
 ipcMain.handle('save-network-setup', async (_, { interface, ip_host, subnet, pool_val1, pool_val2 }) => {
   return new Promise((resolve, reject) => {
-    db.serialize(() => {
-      // Step 1: Delete all existing rows in network_setup
-      db.run(`DELETE FROM network_setup`, err => {
+    db.run(
+      `REPLACE INTO network_setup (interface, ip_host, subnet, pool_val1, pool_val2) VALUES (?, ?, ?, ?, ?)`,
+      [interface, ip_host, subnet, pool_val1, pool_val2],
+      err => {
         if (err) {
-          console.error('Error clearing network_setup:', err);
-          return reject(err.message);
+          console.error('Error saving network setup:', err);
+          reject(err.message);
+        } else {
+          resolve(true);
         }
-
-        // Step 2: Insert the new row
-        const stmt = db.prepare(`
-          INSERT INTO network_setup (interface, ip_host, subnet, pool_val1, pool_val2)
-          VALUES (?, ?, ?, ?, ?)
-        `);
-        stmt.run(interface, ip_host, subnet, pool_val1, pool_val2, err => {
-          stmt.finalize();
-          if (err) {
-            console.error('Error inserting network setup:', err);
-            reject(err.message);
-          } else {
-            resolve(true);
-          }
-        });
-      });
-    });
+      }
+    );
   });
 });
 
@@ -207,6 +197,7 @@ ipcMain.handle('stop-dhcp', async () => {
 app.commandLine.appendSwitch('disable-background-timer-throttling');
 // disable Chromium’s occlusion/backgrounding heuristics
 app.commandLine.appendSwitch('disable-renderer-backgrounding');
+app.commandLine.appendSwitch('disable-features', 'Translate,AutofillServerCommunication'); 
 app.disableHardwareAcceleration(false);
 
 app.whenReady().then(createWindow);
