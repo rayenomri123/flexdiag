@@ -68,17 +68,17 @@ const TitleBar = () => {
         <div className="optioncontrols-section">
           <button className={`optioncontrols-btn ${dhcpOpen ? 'on' : 'off'}`} onClick={() => onDhcpClick()}>
             {dhcpOpen ? (
-              <CiWifiOn className='ooptioncontrols-icon' size={19}/>
+              <CiWifiOn className='optioncontrols-icon1'/>
             ):(
-              <CiWifiOff className='ooptioncontrols-icon' size={19}/>
+              <CiWifiOff className='optioncontrols-icon1'/>
             )}
             
           </button>
           <button className="optioncontrols-btn">
-            <CiLight className='ooptioncontrols-icon' size={18}/>
+            <CiLight className='optioncontrols-icon2'/>
           </button>
           <button className="optioncontrols-btn">
-            <VscBell className='ooptioncontrols-icon'/>
+            <VscBell className='optioncontrols-icon'/>
           </button>
         </div>
         <div className="wincontrols-section" >

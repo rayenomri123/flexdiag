@@ -1,118 +1,283 @@
-.titlebar-container {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+@media (max-width: 1800px) {
+    .titlebar-container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .connectivity-indicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 12px 0 18px;
+        color: var(--valid-color);
+        opacity: 0;
+        font-size: 15px;
+    }
+
+    .connectivity-indicator.connected {
+        opacity: 1;
+    }
+
+    .wincontrols-section {
+        height: 100%;
+        width: 5vw;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .optioncontrols-section {
+        width: 6.5vw;
+        margin-left: auto;
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
+    }
+
+    .appmenu-section {
+        margin-right: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        width: 5vw;
+    }
+
+    .app-logo{
+        height: 18px;
+    }
+
+    .app-name{
+        color: var(--text-secondary);
+        font-family: 'Caveat';
+        font-size: 1.1rem;
+    }
+
+    .wincontrols-btn {
+        flex: 1;
+        background-color: transparent;
+        border: none;
+        color: var(--icon-color);
+        cursor: pointer;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.2s all ease;
+    }
+
+    .optioncontrols-btn {
+    
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        color: var(--icon-color);
+        font-size: 15px;
+        cursor: pointer;
+        margin: 0;
+        padding: 0;
+    }
+
+    .optioncontrols-btn.on {
+        color: var(--valid-color);
+    }
+
+    .optioncontrols-btn.off {
+        color: var(--invalid-color);
+    }
+
+    .optioncontrols-icon {
+        padding: 3px;
+        border-radius: 3px;
+        font-size: 15.5px;
+    }
+
+    .optioncontrols-icon1 {
+        padding: 3px;
+        border-radius: 3px;
+        font-size: 19px;
+    }
+
+    .optioncontrols-icon2 {
+        padding: 3px;
+        border-radius: 3px;
+        font-size: 18px;
+    }
+
+    .optioncontrols-btn:hover .optioncontrols-icon{
+        background-color: var(--bg-tertiary);
+    }
+
+    .optioncontrols-btn:hover .optioncontrols-icon1{
+        background-color: var(--bg-tertiary);
+    }
+
+    .optioncontrols-btn:hover .optioncontrols-icon2{
+        background-color: var(--bg-tertiary);
+    }
+
+    .wincontrols-btn:hover {
+        color: var(--icon-color-hover);
+        background-color: var(--bg-tertiary);
+    }
+
+    .wincontrols-btn.close:hover {
+    background-color: var(--invalid-color);
+    }
+
+    .wincontrols-btn:active {
+        color: black;
+        background-color: white;
+    }
+
+    .wincontrols-btn.close:active {
+        color: black;
+        background-color: white;
+    }
 }
 
-.connectivity-indicator {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 12px 0 18px;
-    color: var(--valid-color);
-    opacity: 0;
-    font-size: 15px;
-}
+@media (min-width: 1800px) {
+    .titlebar-container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+    }
 
-.connectivity-indicator.connected {
-    opacity: 1;
-}
+    .connectivity-indicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 7px 0 21px;
+        color: var(--valid-color);
+        opacity: 0;
+        font-size: 15px;
+    }
 
-.wincontrols-section {
-    height: 100%;
-    width: 5vw;
-    display: flex;
-    flex-direction: row;
-}
+    .connectivity-indicator.connected {
+        opacity: 1;
+    }
 
-.optioncontrols-section {
-    width: 6.5vw;
-    margin-left: auto;
-    display: flex;
-    flex-direction: row;
-    gap: 6px;
-}
+    .wincontrols-section {
+        height: 100%;
+        width: 90px;
+        display: flex;
+        flex-direction: row;
+    }
 
-.appmenu-section {
-    margin-right: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    width: 5vw;
-}
+    .optioncontrols-section {
+        width: 120px;
+        margin-left: auto;
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
+    }
 
-.app-logo{
-    height: 18px;
-}
+    .appmenu-section {
+        margin-right: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        width: 3.5vw;
+    }
 
-.app-name{
-    color: var(--text-secondary);
-    font-family: 'Caveat';
-    font-size: 1.1rem;
-}
+    .app-logo{
+        height: 18px;
+    }
 
-.wincontrols-btn {
-    flex: 1;
-    background-color: transparent;
-    border: none;
-    color: var(--icon-color);
-    cursor: pointer;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.2s all ease;
-}
+    .app-name{
+        color: var(--text-secondary);
+        font-family: 'Caveat';
+        font-size: 1.1rem;
+    }
 
-.optioncontrols-btn {
-   
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    color: var(--icon-color);
-    font-size: 15px;
-    cursor: pointer;
-    margin: 0;
-    padding: 0;
-}
+    .wincontrols-btn {
+        flex: 1;
+        background-color: transparent;
+        border: none;
+        color: var(--icon-color);
+        cursor: pointer;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.2s all ease;
+    }
 
-.optioncontrols-btn.on {
-    color: var(--valid-color);
-}
+    .optioncontrols-btn {
+    
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        color: var(--icon-color);
+        font-size: 15px;
+        cursor: pointer;
+        margin: 0;
+        padding: 0;
+    }
 
-.optioncontrols-btn.off {
-    color: var(--invalid-color);
-}
+    .optioncontrols-btn.on {
+        color: var(--valid-color);
+    }
 
-.ooptioncontrols-icon {
-    padding: 3px;
-    border-radius: 3px;
-}
+    .optioncontrols-btn.off {
+        color: var(--invalid-color);
+    }
 
-.optioncontrols-btn:hover .ooptioncontrols-icon{
-    background-color: var(--bg-tertiary);
-}
+    .optioncontrols-icon {
+        padding: 3px;
+        border-radius: 3px;
+        font-size: 17px;
+    }
 
-.wincontrols-btn:hover {
-    color: var(--icon-color-hover);
-    background-color: var(--bg-tertiary);
-}
+    .optioncontrols-icon1 {
+        padding: 3px;
+        border-radius: 3px;
+        font-size: 23px;
+    }
 
-.wincontrols-btn.close:hover {
-  background-color: var(--invalid-color);
-}
+    .optioncontrols-icon2 {
+        padding: 3px;
+        border-radius: 3px;
+        font-size: 22px;
+    }
 
-.wincontrols-btn:active {
-    color: black;
-    background-color: white;
-}
+    .optioncontrols-btn:hover .optioncontrols-icon{
+        background-color: var(--bg-tertiary);
+    }
 
-.wincontrols-btn.close:active {
-    color: black;
-    background-color: white;
+    .optioncontrols-btn:hover .optioncontrols-icon1{
+        background-color: var(--bg-tertiary);
+    }
+
+    .optioncontrols-btn:hover .optioncontrols-icon2{
+        background-color: var(--bg-tertiary);
+    }
+
+    .wincontrols-btn:hover {
+        color: var(--icon-color-hover);
+        background-color: var(--bg-tertiary);
+    }
+
+    .wincontrols-btn.close:hover {
+    background-color: var(--invalid-color);
+    }
+
+    .wincontrols-btn:active {
+        color: black;
+        background-color: white;
+    }
+
+    .wincontrols-btn.close:active {
+        color: black;
+        background-color: white;
+    }
 }
