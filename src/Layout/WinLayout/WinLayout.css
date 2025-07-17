@@ -45,12 +45,23 @@
         width: 62vw;
     }
 
+    .display-container {
+        height: 100%;
+        width: 100%;
+    }
+
     .console-section {
         background-color: var(--bg-secondary);
-        height: 25vh;
-        width: 60vw;
+        height: 25%;
+        width: 100%;
         margin-top: auto;
         border-top: 1px solid var(--border-color);
+    }
+
+    .console-section.full {
+  
+        height: 100%;
+
     }
 
     .config-section {
@@ -116,15 +127,24 @@
         display: flex;
         flex-direction: column;
         background-color: var(--bg-primary);
-        height: 96.2vh;
+        height: 97.4vh;
         width: 62vw;
+    }
+
+    .display-container {
+        height: 100%;
+        width: 100%;
     }
 
     .console-section {
         background-color: var(--bg-secondary);
-        height: 25vh;
-        width: 60vw;
+        height: 30%;
+        width: 100%;
         margin-top: auto;
         border-top: 1px solid var(--border-color);
+    }
+
+    .console-section.full {
+        height: 100%;
     }
 }

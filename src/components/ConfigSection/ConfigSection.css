@@ -10,19 +10,19 @@
     .tools-indicator-container{
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 8px;
         align-items: center;
         justify-content: center;
         color:var(--text-tertiary);
     }
 
     .tools-indicator-icon {
-        font-size: 50px;
+        font-size: 40px;
     }
 
     .tools-indicator-title {
         font-family: system-ui;
-        font-size: 0.7rem;
+        font-size: 0.6rem;
     }
 }
 

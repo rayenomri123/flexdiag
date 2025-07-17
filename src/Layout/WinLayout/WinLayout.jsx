@@ -6,19 +6,23 @@ import DHCPMenuBar from '../../components/DHCPMenuBar/DHCPMenuBar'
 import NetConfigSection from '../../components/NetConfigSection/NetConfigSection'
 import ConfigSection from '../../components/ConfigSection/ConfigSection'
 import DHCPLogs from '../../components/DHCPLogs/DHCPLogs'
+import Console from '../../components/Console/Console'
 
 const WinLayout = () => {
 
-  const [isSideBarBtnClicked, setIsSideBarBtnClicked] = useState(false);
-  const [isDhcpBtnClicked, setIsDhcpBtnClicked] = useState(false);
+  const [isSideBarBtnClicked, setIsSideBarBtnClicked] = useState(true);
+  const [isDhcpBtnClicked, setIsDhcpBtnClicked] = useState(true);
   const [isConfigSectionOpen, setIsConfigSectionOpen] = useState(true);
   const [isNetConfigOpen, setisNetConfigOpen] = useState(false);
   const [isDhcpLogOpen, setIsDhcpLogOpen] = useState(false);
+  const [consoleOpen, setConsoleOpen] = useState(true);
+  const [consoleFull, setConsoleFull] = useState(false);
+  const [dhcpOpen, setDhcpOpen] = useState(false);
 
   return (
     <div className='win-container'>
         <div className="titlebar-section">
-            <TitleBar />
+            <TitleBar dhcpOpen={dhcpOpen} setDhcpOpen={setDhcpOpen} />
         </div>
         <div className="main-win">
             <div className="sidebar-section">
@@ -44,12 +48,26 @@ const WinLayout = () => {
               </div>
             )}
             <div className="display-section">
-              {isDhcpLogOpen && (
-                <DHCPLogs />
+              {!consoleFull && (
+                <div className="display-container">
+                  {isDhcpLogOpen && (
+                    <DHCPLogs />
+                  )}
+                </div>
               )}
-                {/* <div className="console-section">
-                    
-                </div> */}
+              {consoleOpen && (
+                <div className={`console-section ${consoleFull ? 'full' : ''}`}>
+                  <Console 
+                    consoleOpen={consoleOpen} 
+                    setConsoleOpen={setConsoleOpen}
+                    consoleFull={consoleFull} 
+                    setConsoleFull={setConsoleFull}
+                    dhcpOpen={dhcpOpen}
+                    setDhcpOpen={setDhcpOpen}
+                  />
+                </div>
+              )}
+
             </div>
             {isConfigSectionOpen && (
               <div className="config-section">

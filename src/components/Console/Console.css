@@ -1,0 +1,131 @@
+@media (max-width: 1800px) {
+    .console-container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .console-container-controls {
+        height: 35px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 0 10px;
+        box-sizing: border-box;
+        color: var(--icon-color);
+        gap: 2px;
+        font-size: 16px;
+    }
+
+    .console-container-controls-icon {
+        background-color: transparent;
+        padding: 2px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .console-container-controls-icon:hover {
+        background-color: var(--bg-4);
+        color: var(--icon-color-hover);
+        padding: 2px;
+        border-radius: 4px;
+    }
+
+    .console-container-controls-icon.act {
+        background-color: var(--bg-4);
+    }
+
+    .console-container-output {
+        height: 100%;
+        width: 100%;
+    }
+
+    .console-container-init {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-tertiary);
+        gap: 8px;
+    }
+
+    .console-container-init-icon {
+        font-size: 40px;
+    }
+
+    .console-container-init-title {
+        font-size: 0.6rem;
+        font-family: system-ui;
+    }
+}
+
+@media (min-width: 1800px) {
+    .console-container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .console-container-controls {
+        height: 40px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 0 12px;
+        box-sizing: border-box;
+        color: var(--icon-color);
+        gap: 2px;
+        font-size: 17px;
+    }
+
+    .console-container-controls-icon {
+        background-color: transparent;
+        padding: 3px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .console-container-controls-icon:hover {
+        background-color: var(--bg-4);
+        color: var(--icon-color-hover);
+        padding: 3px;
+        border-radius: 4px;
+    }
+
+    .console-container-controls-icon.act {
+        background-color: var(--bg-4);
+    }
+
+    .console-container-output {
+        height: 100%;
+        width: 100%;
+    }   
+
+    .console-container-init {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-tertiary);
+        gap: 12px;
+    }
+
+    .console-container-init-icon {
+        font-size: 60px;
+    }
+
+    .console-container-init-title {
+        font-size: 0.75rem;
+        font-family: system-ui;
+    }
+}

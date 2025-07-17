@@ -5,10 +5,9 @@ import logo from '../../assets/logo.png'
 
 const POLL_INTERVAL = 2000; // Check ethernet connectivity every 2s
 
-const TitleBar = () => {
+const TitleBar = ({ dhcpOpen, setDhcpOpen}) => {
   
   const [isConnected, setIsConnected] = useState(false);
-  const [dhcpOpen, setDhcpOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -58,7 +57,7 @@ const TitleBar = () => {
   return (
     <div className='titlebar-container'>
         <div className={`connectivity-indicator ${isConnected ? 'connected' : ''}`}>
-          <VscCircleLargeFilled />
+          <VscCircleLargeFilled className='connectivity-indicator-icon'/>
         </div>
         <div className="appmenu-section">
           <img src={logo} alt="Ampere logo" className='app-logo'/>
