@@ -35,7 +35,6 @@
 
     .optioncontrols-section {
         width: 6.5vw;
-        margin-left: auto;
         display: flex;
         flex-direction: row;
         gap: 6px;
@@ -136,6 +135,13 @@
         color: black;
         background-color: white;
     }
+
+    .layoutcontrols-section {
+        width: 6.5vw;
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
+    }
 }
 
 @media (min-width: 1800px) {
@@ -175,7 +181,6 @@
 
     .optioncontrols-section {
         width: 120px;
-        margin-left: auto;
         display: flex;
         flex-direction: row;
         gap: 6px;
@@ -275,5 +280,12 @@
     .wincontrols-btn.close:active {
         color: black;
         background-color: white;
+    }
+
+    .layoutcontrols-section {
+        width: 6.5vw;
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
     }
 }

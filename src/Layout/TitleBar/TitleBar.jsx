@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import './TitleBar.css'
-import { VscClose, VscChromeMinimize, VscBell, VscCircleLargeFilled, VscColorMode, VscGitMerge } from 'react-icons/vsc'
+import { VscClose, VscChromeMinimize, VscBell, VscCircleLargeFilled, VscColorMode, VscGitMerge, VscLayoutPanel, VscLayoutPanelOff, VscLayoutSidebarLeftOff, VscLayoutSidebarLeft } from 'react-icons/vsc'
 import logo from '../../assets/logo.png'
 
 const POLL_INTERVAL = 2000; // Check ethernet connectivity every 2s
 
-const TitleBar = ({ dhcpOpen, setDhcpOpen}) => {
+const TitleBar = ({ dhcpOpen, setDhcpOpen, consoleOpen, setConsoleOpen, isSideBarBtnClicked, setIsSideBarBtnClicked}) => {
   
   const [isConnected, setIsConnected] = useState(false);
 
@@ -62,6 +62,22 @@ const TitleBar = ({ dhcpOpen, setDhcpOpen}) => {
         <div className="appmenu-section">
           <img src={logo} alt="Ampere logo" className='app-logo'/>
           <div className="app-name">FlexDiag</div>
+        </div>
+        <div className="layoutcontrols-section">
+          <button className="optioncontrols-btn" onClick={() => setIsSideBarBtnClicked(!isSideBarBtnClicked)}>
+            {isSideBarBtnClicked ? (
+              <VscLayoutSidebarLeft className='optioncontrols-icon'/>
+            ):(
+              <VscLayoutSidebarLeftOff className='optioncontrols-icon'/>
+            )}
+          </button>
+          <button className="optioncontrols-btn" onClick={() => setConsoleOpen(!consoleOpen)}>
+            {consoleOpen ? (
+              <VscLayoutPanel className='optioncontrols-icon'/>
+            ):(
+              <VscLayoutPanelOff className='optioncontrols-icon'/>
+            )}
+          </button>
         </div>
         <div className="optioncontrols-section">
           <button className={`optioncontrols-btn ${dhcpOpen ? 'on' : 'off'}`} onClick={() => onDhcpClick()}>

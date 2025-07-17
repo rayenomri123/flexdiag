@@ -22,7 +22,14 @@ const WinLayout = () => {
   return (
     <div className='win-container'>
         <div className="titlebar-section">
-            <TitleBar dhcpOpen={dhcpOpen} setDhcpOpen={setDhcpOpen} />
+            <TitleBar 
+              dhcpOpen={dhcpOpen} 
+              setDhcpOpen={setDhcpOpen}
+              consoleOpen={consoleOpen}
+              setConsoleOpen={setConsoleOpen}
+              isSideBarBtnClicked={isSideBarBtnClicked}
+              setIsSideBarBtnClicked={setIsSideBarBtnClicked}
+            />
         </div>
         <div className="main-win">
             <div className="sidebar-section">
